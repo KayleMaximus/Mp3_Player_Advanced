@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mp3_player_advanced.views.RootMediaPlayerPanel;
-import com.example.mp3_player_advanced.views.RootNavigationPanel;
+import com.example.mp3_player_advanced.views.panels.RootMediaPlayerPanel;
+import com.example.mp3_player_advanced.views.panels.RootNavigationPanel;
 import com.realgear.multislidinguppanel.Adapter;
 
 import com.realgear.multislidinguppanel.MultiSlidingUpPanelLayout;

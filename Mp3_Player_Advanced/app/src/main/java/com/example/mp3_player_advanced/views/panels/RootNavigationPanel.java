@@ -1,4 +1,4 @@
-package com.example.mp3_player_advanced.views;
+package com.example.mp3_player_advanced.views.panels;
 
 import static com.realgear.multislidinguppanel.MultiSlidingUpPanelLayout.COLLAPSED;
 
