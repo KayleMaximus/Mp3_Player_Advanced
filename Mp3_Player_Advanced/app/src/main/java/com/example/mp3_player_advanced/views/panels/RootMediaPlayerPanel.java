@@ -1,7 +1,8 @@
 package com.example.mp3_player_advanced.views.panels;
 
+import static com.realgear.multislidinguppanel.MultiSlidingUpPanelLayout.COLLAPSED;
+
 import android.content.Context;
-import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +13,18 @@ import androidx.annotation.NonNull;
 
 import com.example.extensions.bottomsheet.CustomBottomSheetBehavior;
 import com.example.mp3_player_advanced.R;
+import com.example.mp3_player_advanced.views.MediaPlayerBarView;
+import com.example.mp3_player_advanced.views.MediaPlayerView;
 import com.realgear.multislidinguppanel.BasePanelView;
+import com.realgear.multislidinguppanel.IPanel;
 import com.realgear.multislidinguppanel.MultiSlidingUpPanelLayout;
 
-import static com.realgear.multislidinguppanel.MultiSlidingUpPanelLayout.COLLAPSED;
-
-import java.util.Random;
-
 public class RootMediaPlayerPanel extends BasePanelView {
+
+
+
+    private MediaPlayerView mMediaPlayerView;
+    private MediaPlayerBarView mMediaPlayerBarView;
 
     public RootMediaPlayerPanel(@NonNull Context context, MultiSlidingUpPanelLayout panelLayout) {
         super(context, panelLayout);
@@ -39,6 +44,12 @@ public class RootMediaPlayerPanel extends BasePanelView {
 
     @Override
     public void onBindView() {
+        mMediaPlayerView = new MediaPlayerView(findViewById(R.id.media_player_view));
+        mMediaPlayerBarView = new MediaPlayerBarView(findViewById(R.id.media_player_bar_view));
+
+
+
+
         DisplayMetrics dm = getResources().getDisplayMetrics();
         FrameLayout layout = findViewById(R.id.media_player_bottom_sheet_behavior);
 
@@ -62,17 +73,18 @@ public class RootMediaPlayerPanel extends BasePanelView {
                     case CustomBottomSheetBehavior.STATE_ANCHORED:
                     case CustomBottomSheetBehavior.STATE_EXPANDED:
                     case CustomBottomSheetBehavior.STATE_DRAGGING:
-                        mParentSlidingPanel.setSlidingEnabled(false);
+                        getMultiSlidingUpPanel().setSlidingEnabled(false);
                         break;
                     default:
-                        mParentSlidingPanel.setSlidingEnabled(true);
+                        getMultiSlidingUpPanel().setSlidingEnabled(true);
 
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
+                mMediaPlayerView.onSliding(slideOffset, MediaPlayerView.STATE_PARTIAL);
+                mMediaPlayerBarView.onSliding(slideOffset,MediaPlayerBarView.STATE_PARTIAL);
             }
         });
 
@@ -81,5 +93,13 @@ public class RootMediaPlayerPanel extends BasePanelView {
     @Override
     public void onPanelStateChanged(int panelSate) {
 
+    }
+
+    @Override
+    public void onSliding(@NonNull IPanel<View> panel, int top, int dy, float slidingOffset) {
+        super.onSliding(panel, top, dy, slidingOffset);
+
+        mMediaPlayerView.onSliding(slidingOffset, MediaPlayerView.STATE_NORMAL);
+        mMediaPlayerBarView.onSliding(slidingOffset,MediaPlayerBarView.STATE_NORMAL);
     }
 }

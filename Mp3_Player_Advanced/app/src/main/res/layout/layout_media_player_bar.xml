@@ -10,11 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="0dp"
-        android:background="#0000000"
+        app:cardBackgroundColor="#00000000"
         app:cardCornerRadius="6dp"
         app:cardElevation="0dp">
 
         <FrameLayout
+            android:id="@+id/media_player_bar_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#424242"/>
@@ -36,6 +37,7 @@
                 app:indicatorColor="#FFF"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/media_player_bar_controls_container"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -57,7 +59,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/album_24px"
+                        android:src="@drawable/album_24px"/>
 
                 </androidx.cardview.widget.CardView>
 
